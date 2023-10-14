@@ -1,5 +1,6 @@
 package com.uploadapp;
 
+import com.uploadapp.service.FileStorageSerive;
 import com.uploadapp.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
@@ -17,8 +18,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UploadappApplication {
 	private final StorageService service;
+	private final FileStorageSerive fileStorageSerive;
 
-	@PostMapping
+	@PostMapping("/image")
 	public ResponseEntity<String> uploadImage(@RequestParam("image")MultipartFile file){
 		String uploadImage;
 		try {
@@ -30,7 +32,7 @@ public class UploadappApplication {
 	}
 
 
-	@GetMapping("/{fileName}")
+	@GetMapping("/image/{fileName}")
 	public ResponseEntity<byte[]> downloadImage(@PathVariable String fileName){
 		byte[] bytes = service.downloadImage(fileName);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -38,6 +40,25 @@ public class UploadappApplication {
 				.body(bytes);
 	}
 
+	@PostMapping("/file")
+	public ResponseEntity<String> uploadFile(@RequestParam("image")MultipartFile file){
+		String uploadImage;
+		try {
+			uploadImage = fileStorageSerive.uploadImageToFileSystem(file);
+		}catch (IOException e){
+			uploadImage="error";
+		}
+		return new ResponseEntity<>(uploadImage, HttpStatus.OK);
+	}
+
+
+	@GetMapping("/file/{fileName}")
+	public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName) throws IOException {
+		byte[] bytes = fileStorageSerive.downloadFile(fileName);
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("image/png"))
+				.body(bytes);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(UploadappApplication.class, args);
