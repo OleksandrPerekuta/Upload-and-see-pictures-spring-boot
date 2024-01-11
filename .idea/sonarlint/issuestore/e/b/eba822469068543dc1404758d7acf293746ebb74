@@ -1,0 +1,14 @@
+
+z
+java:S1488$"]Immediately return this expression instead of assigning it to the temporary variable "image".(û•Ô¤8öÿôı²1
+j
+java:S3655#"HCall "file.isPresent()" or "!file.isEmpty()" before accessing the value.(éø ¸úÿÿÿÿ8Íş²1
+T
+java:S2589"7Remove this expression which always evaluates to "true"(ê¨—8Íş²1
+u	java:S116"TRename this field "FILE_PATH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şİúÿÿÿÿ8ŸÍóı²1
+C
+java:S1170"!Make this final field static too.(Şİúÿÿÿÿ8 Íóı²1
+c
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(Şİúÿÿÿÿ8§Íóı²1
+]
+java:S1128";Remove this unused import 'lombok.RequiredArgsConstructor'.(ÑØúøÿÿÿÿ8åş²1

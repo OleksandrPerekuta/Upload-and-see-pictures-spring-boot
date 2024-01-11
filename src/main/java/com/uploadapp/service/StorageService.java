@@ -16,12 +16,20 @@ public class StorageService {
 
 
     public String uploadImage(MultipartFile file) throws IOException {
-        ImageData imageData = storageRepository.save(ImageData.builder()
-                .name(file.getOriginalFilename())
-                .type(file.getContentType())
-                .imageData(file.getBytes())
-                .build());
+        Optional<ImageData> optional=storageRepository.findByNameAndType(file.getOriginalFilename(),file.getContentType());
+        if (optional.isPresent()){
+            ImageData existingImageData = optional.get();
+            existingImageData.setImageData(file.getBytes());
+            storageRepository.save(existingImageData);
+            return "File content updated successfully: " + existingImageData.getName();
+        }else{
+            ImageData imageData = storageRepository.save(ImageData.builder()
+                    .name(file.getOriginalFilename())
+                    .type(file.getContentType())
+                    .imageData(file.getBytes())
+                    .build());
             return "file uploaded successfully :  "+imageData.getName();
+        }
     }
     public byte[] downloadImage(String filename){
         Optional<ImageData> image = storageRepository.findByName(filename);
