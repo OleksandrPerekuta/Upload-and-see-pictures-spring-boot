@@ -2,7 +2,7 @@
 
 **Description**
 
-This is a project that show two approaches of storing data.
+This is a project that show two approaches of storing data with using REST-API.
 
 1.In filesystem - db stores only paths to the file.
 2.Inside databse directly - db stores file in datatype BLOB.
@@ -24,3 +24,4 @@ Both have their prons and cons but main are:
 * Spring (Boot, Data)
 * Maven
 * MySQL docker container
+* Postman
